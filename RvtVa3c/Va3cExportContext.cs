@@ -5,6 +5,7 @@ using System.Linq;
 using System.Diagnostics;
 using System.IO;
 using Autodesk.Revit.DB;
+using Autodesk.Revit.UI;
 //using Autodesk.Revit.Utility;
 using Newtonsoft.Json;
 using static RvtVa3c.Va3cContainer;
@@ -430,6 +431,7 @@ namespace RvtVa3c
     {
             foreach (var child in obj.children)
             {
+                TaskDialog.Show("glTF", String.Format("Processing child: {0}", child.name));
                 glTFNode childNode = new glTFNode();
                 childNode.name = child.name;
                 foreach (double coord in child.matrix)
@@ -457,7 +459,7 @@ namespace RvtVa3c
                 }
                 if (child.children != null && child.children.Count > 0)
                 {
-                    return RecursivelyAddChilren(gltf, child, childIndex);
+                    RecursivelyAddChilren(gltf, child, childIndex);
                 }
             }
             return gltf;
