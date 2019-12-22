@@ -431,7 +431,7 @@ namespace RvtVa3c
     {
             foreach (var child in obj.children)
             {
-                TaskDialog.Show("glTF", String.Format("Processing child: {0}", child.name));
+                //TaskDialog.Show("glTF", String.Format("Processing child: {0}", child.name));
                 glTFNode childNode = new glTFNode();
                 childNode.name = child.name;
                 foreach (double coord in child.matrix)
@@ -451,7 +451,7 @@ namespace RvtVa3c
                     glTFMesh mesh = new glTFMesh();
                     glTFMeshPrimitive primative = new glTFMeshPrimitive();
                     primative.attributes.POSITION = dataContainer.vertexAccessorIndex;
-                    primative.attributes.NORMAL = dataContainer.normalsAccessorIndex;
+                    //primative.attributes.NORMAL = dataContainer.normalsAccessorIndex;
                     primative.indices = dataContainer.indexAccessorIndex;
                     mesh.primitives = new List<glTFMeshPrimitive>() { primative };
                     int meshIndex = gltf.AddMesh(mesh);
@@ -497,10 +497,10 @@ namespace RvtVa3c
             ? Formatting.Indented
             : Formatting.None;
 
-        myjs = JsonConvert.SerializeObject(
-            _container, formatting, settings );
+        //myjs = JsonConvert.SerializeObject(
+        //    _container, formatting, settings );
 
-        File.WriteAllText( _filename + ".js", myjs );
+        //File.WriteAllText( _filename + ".js", myjs );
 
         // Write the glTF meta
         glTF gltf = this.MakeGltf();
@@ -517,10 +517,10 @@ namespace RvtVa3c
                         {
                             writer.Write((float)coord);
                         }
-                        foreach (var normal in bin.normalBuffer)
-                        {
-                            writer.Write((float)normal);
-                        }
+                        //foreach (var normal in bin.normalBuffer)
+                        //{
+                        //    writer.Write((float)normal);
+                        //}
                         foreach (var index in bin.indexBuffer)
                         {
                             writer.Write((int)index);

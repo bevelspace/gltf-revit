@@ -12,10 +12,10 @@ namespace RvtVa3c
     {
         public List<float> vertexBuffer { get; set; } = new List<float>();
         public List<int> indexBuffer { get; set; } = new List<int>();
-        public List<float> normalBuffer { get; set; } = new List<float>();
+        //public List<float> normalBuffer { get; set; } = new List<float>();
         public int vertexAccessorIndex { get; set; }
         public int indexAccessorIndex { get; set; }
-        public int normalsAccessorIndex { get; set; }
+        //public int normalsAccessorIndex { get; set; }
         public string name { get; set; }
     }
     public class glTFVersion
@@ -108,16 +108,16 @@ namespace RvtVa3c
             {
                 bufferData.indexBuffer.Add(index);
             }
-            foreach (var normal in geomData.normals)
-            {
-                bufferData.normalBuffer.Add((float)normal);
-            }
+            //foreach (var normal in geomData.normals)
+            //{
+            //    bufferData.normalBuffer.Add((float)normal);
+            //}
 
             // Get max and min for vertex data
             float[] vertexMinMax = getVec3MinMax(bufferData.vertexBuffer);
 
             // Get max and min for normal data
-            float[] normalMinMax = getVec3MinMax(bufferData.normalBuffer);
+            //float[] normalMinMax = getVec3MinMax(bufferData.normalBuffer);
 
             // Get max and min for index data
             int[] faceMinMax = getScalarMinMax(bufferData.indexBuffer);
@@ -126,7 +126,7 @@ namespace RvtVa3c
             int elementsPerVertex = 3;
             int bytesPerElement = 4;
             int bytesPerVertex = elementsPerVertex * bytesPerElement;
-            int numVec3 = (geom.data.normals.Count + geom.data.vertices.Count) / elementsPerVertex;
+            int numVec3 = (geom.data.vertices.Count) / elementsPerVertex;
             int sizeOfVec3View = numVec3 * bytesPerVertex;
             glTFBufferView vec3View = new glTFBufferView();
             vec3View.buffer = bufferIdx;
@@ -179,16 +179,16 @@ namespace RvtVa3c
             bufferData.vertexAccessorIndex = this.accessors.Count - 1;
 
             // add a normals accessor
-            glTFAccessor normalsAccessor = new glTFAccessor();
-            normalsAccessor.bufferView = vec3ViewIdx;
-            normalsAccessor.byteOffset = (positionAccessor.count) * bytesPerVertex;
-            normalsAccessor.componentType = ComponentType.FLOAT;
-            normalsAccessor.count = geom.data.normals.Count / elementsPerVertex;
-            normalsAccessor.type = "VEC3";
-            normalsAccessor.max = new List<float>() { normalMinMax[1], normalMinMax[3], normalMinMax[5] };
-            normalsAccessor.min = new List<float>() { normalMinMax[0], normalMinMax[2], normalMinMax[4] };
-            this.accessors.Add(normalsAccessor);
-            bufferData.normalsAccessorIndex = this.accessors.Count - 1;
+            //glTFAccessor normalsAccessor = new glTFAccessor();
+            //normalsAccessor.bufferView = vec3ViewIdx;
+            //normalsAccessor.byteOffset = (positionAccessor.count) * bytesPerVertex;
+            //normalsAccessor.componentType = ComponentType.FLOAT;
+            //normalsAccessor.count = geom.data.normals.Count / elementsPerVertex;
+            //normalsAccessor.type = "VEC3";
+            //normalsAccessor.max = new List<float>() { normalMinMax[1], normalMinMax[3], normalMinMax[5] };
+            //normalsAccessor.min = new List<float>() { normalMinMax[0], normalMinMax[2], normalMinMax[4] };
+            //this.accessors.Add(normalsAccessor);
+            //bufferData.normalsAccessorIndex = this.accessors.Count - 1;
 
             // add a face accessor
             glTFAccessor faceAccessor = new glTFAccessor();
@@ -220,7 +220,7 @@ namespace RvtVa3c
         /// The index of the accessor for position data.
         /// </summary>
         public int POSITION { get; set; }
-        public int NORMAL { get; set; }
+        //public int NORMAL { get; set; }
     }
 
     public class glTFMeshPrimitive
