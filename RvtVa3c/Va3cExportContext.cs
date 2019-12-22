@@ -475,16 +475,16 @@ namespace RvtVa3c
 
         _container.obj.children = _objects.Values.ToList();
 
-        // Serialise scene
+            // Serialise scene
 
-        //using( FileStream stream
-        //  = File.OpenWrite( filename ) )
-        //{
-        //  DataContractJsonSerializer serialiser
-        //    = new DataContractJsonSerializer(
-        //      typeof( Va3cContainer ) );
-        //  serialiser.WriteObject( stream, _container );
-        //}
+            //using( FileStream stream
+            //  = File.OpenWrite( filename ) )
+            //{
+            //  DataContractJsonSerializer serialiser
+            //    = new DataContractJsonSerializer(
+            //      typeof( Va3cContainer ) );
+            //  serialiser.WriteObject( stream, _container );
+            //}
 
         JsonSerializerSettings settings
             = new JsonSerializerSettings();
@@ -497,10 +497,17 @@ namespace RvtVa3c
             ? Formatting.Indented
             : Formatting.None;
 
+<<<<<<< HEAD
         //myjs = JsonConvert.SerializeObject(
         //    _container, formatting, settings );
 
         //File.WriteAllText( _filename + ".js", myjs );
+=======
+        myjs = JsonConvert.SerializeObject(
+            _container, formatting, settings);
+
+        File.WriteAllText(_filename + ".js", myjs);
+>>>>>>> 3769df54652957ea4e1341503bf174363d51cfb4
 
         // Write the glTF meta
         glTF gltf = this.MakeGltf();
